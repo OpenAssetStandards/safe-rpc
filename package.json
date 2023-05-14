@@ -1,0 +1,61 @@
+{
+  "name": "safe-rpc",
+  "version": "0.1.0",
+  "description": "An encrypted, authenticated, transport agnostic rpc protocol.",
+  "repository": "OpenAssetStandards/safe-rpc",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "node": {
+        "types": "./dist/node.d.ts",
+        "import": "./dist/node.mjs",
+        "require": "./dist/node.cjs"
+      },
+      "default": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
+      }
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.mjs",
+      "require": "./dist/node.cjs"
+    },
+    "./simpleTransport": {
+      "types": "./dist/simpleTransport.d.ts",
+      "import": "./dist/simpleTransport.mjs",
+      "require": "./dist/simpleTransport.cjs"
+    }
+  },
+  "main": "./dist/node.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "node.d.ts"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "jest",
+    "lint": "eslint --ext .ts . && prettier -c src test playground",
+    "lint:fix": "eslint --fix --ext .ts . && prettier -w src test playground",
+    "prepack": "pnpm build",
+    "release": "pnpm test && npm publish && git push --follow-tags",
+    "test": "pnpm lint && jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.3",
+    "eslint": "^8.39.0",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "unbuild": "^1.2.1"
+  },
+  "packageManager": "pnpm@8.4.0"
+}
