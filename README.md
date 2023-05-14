@@ -7,7 +7,8 @@
 [![License][license-src]][license-href]
 [![JSDocs][jsdocs-src]][jsdocs-href]
 
-An encrypted, authenticated, transport agnostic rpc protocol.
+### An encrypted, authenticated, transport agnostic rpc protocol.
+Create RPC services that communicate over atypical transport layers like the postMessage API(see [safe-rpc-iframe](https://github.com/OpenAssetStandards/safe-rpc-iframe)), usb flash drive, homing pigeon, snail mail, audio, QR codes and more.
 
 ## 🚀 Quick Start
 
@@ -22,8 +23,8 @@ yarn add safe-rpc
 ```
 
 Example Usage:
-
-```js
+First define your channel and peer classes:
+```typescript
 import {
   EncryptedRPCSession,
   EncryptedSession,
@@ -209,8 +210,34 @@ class SimplePeer extends EncryptedSessionMessageHub {
     this.channel.dispose();
   }
 }
+```
 
+Then create your sessions, register RPC handlers and start making calls 🔥
 
+```typescript
+const transportHub = new SimpleSyncTransport();
+const peerA = await SimplePeer.newPeerSession(
+  transportHub,
+  "peer_a",
+  "peer_b"
+);
+const peerBConfigString = await peerA.getConfigStringForPeer();
+const peerB = await SimplePeer.createWithPeerFromConfigString(
+  transportHub,
+  peerBConfigString
+);
+const rpcSessionPeerA = new EncryptedRPCSession(peerA);
+const rpcSessionPeerB = new EncryptedRPCSession(peerB);
+rpcSessionPeerA.registerRPCFunction("ping", async () => {
+  const result = await rpcSessionPeerA.callRPC("reverse", "gnop".split(""));
+  return result.join("");
+});
+rpcSessionPeerB.registerRPCFunction("reverse", (array: any[]) =>
+  array.concat([]).reverse()
+);
+const result = await rpcSessionPeerB.callRPC("ping");
+// should print "pong"
+console.log(result);
 ```
 
 ## ✔️ Works with Node.js
