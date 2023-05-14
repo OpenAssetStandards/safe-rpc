@@ -1,6 +1,6 @@
 {
   "name": "safe-rpc",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "description": "An encrypted, authenticated, transport agnostic rpc protocol.",
   "repository": "OpenAssetStandards/safe-rpc",
   "license": "MIT",
