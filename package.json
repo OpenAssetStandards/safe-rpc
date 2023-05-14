@@ -44,7 +44,7 @@
     "lint:fix": "eslint --fix --ext .ts . && prettier -w src test",
     "prepack": "pnpm build",
     "release": "pnpm test && npm publish && git push --follow-tags",
-    "test": "pnpm lint && jest"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
