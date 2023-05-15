@@ -253,10 +253,6 @@ We use [conditional exports](https://nodejs.org/api/packages.html#packages_condi
 
 ## ❓ FAQ
 
-**Why export is called `safe-rpc` instead of `fetch`?**
-
-Using the same name of `fetch` can be confusing since API is different but still it is a fetch so using closest possible alternative. You can however, import `{ fetch }` from `safe-rpc` which is auto polyfilled for Node.js and using native otherwise.
-
 **Why do HMAC if GCM already does authentication with GMAC?**
 GMAC is known to have some problems ([Authentication Failures in NIST version of GCM ](https://csrc.nist.gov/csrc/media/projects/block-cipher-techniques/documents/bcm/joux_comments.pdf), [Cycling Attacks on GCM, GHASH
 and Other Polynomial MACs and Hashes](https://eprint.iacr.org/2011/202.pdf)), and we don't want to take any chances.
