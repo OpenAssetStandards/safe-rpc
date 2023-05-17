@@ -42,7 +42,7 @@ function decodeResponseMessage(
 ): IRPCResponseSuccessMessage | IRPCResponseErrorMessage {
 
   const messageLength = message.length;
-  if(messageLength<=10){
+  if(messageLength<10){
     throw new Error("invalid message length, missing function name");
   }
   const callId = readUint32LEFromUint8Array(message, 5);
